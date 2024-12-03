@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, View, Image, TouchableOpacity, ImageBackground, StatusBar, TextInput } from 'react-native';
+import {
+    createStaticNavigation,
+    useNavigation,
+  } from '@react-navigation/native';
 
 function RestaurantHomeScreen(props) {
 
     const [show, setShow] = useState(true);
+    const navigation = useNavigation();
 
     return (
     <SafeAreaView style={styles.container}>
@@ -20,7 +25,7 @@ function RestaurantHomeScreen(props) {
 
         <Text style={styles.text}>Olá, </Text>
 
-        <TouchableOpacity style={styles.order}>
+        <TouchableOpacity style={styles.order} onPress={() => navigation.navigate('NewOrder')}>
             <Image source={require('../assets/new_order_btn.png')}/>
         </TouchableOpacity>
 
