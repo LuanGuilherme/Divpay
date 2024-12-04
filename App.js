@@ -7,7 +7,6 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import SignInScreen from './screens/SignInScreen';
 import RestaurantHomeScreen from './screens/RestaurantHomeScreen';
 import ClientHomeScreen from './screens/ClientHomeScreen';
-import ClientHomeScreen from './screens/ClientHomeScreen';
 import NewOrderScreen from './screens/NewOrderScreen';
 import NewGroupScreen from './screens/NewGroupScreen';
 import PaymentScreen from './screens/PaymentScreen';
