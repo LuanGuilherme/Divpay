@@ -9,8 +9,6 @@ function SignInScreen(props) {
     const navigation = useNavigation();
 
     const handleSignIn = () => {
-            console.log('Email:', email); // Exibe o email no console
-            console.log('Senha:', password); // Exibe a senha no console
 
             switch(email){
                 case "test1@test" :

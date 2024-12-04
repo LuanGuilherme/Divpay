@@ -25,6 +25,7 @@ function OpenOrderScreen() {
       )
       console.log(test)
       const retorno = await test.json()
+      console.log(retorno)
       navigation.navigate("NewGroup", { orderJson: retorno })
       // .then((response) => console.log(response.data))
       // .catch((error) => console.error('Erro:', error));
