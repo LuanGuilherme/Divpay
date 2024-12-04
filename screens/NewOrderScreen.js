@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, View, Image, TouchableOpacity, ImageBackground, StatusBar, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const createOrderEndpoint = 'http://localhost:3000/orders/create';
+const createOrderEndpoint = 'http://18.119.115.84/orders/create';
 
 function NewOrderScreen(props) {
     const navigation = useNavigation();
@@ -25,23 +25,21 @@ function NewOrderScreen(props) {
     };    
     
     const handleContinue = async () => {
-      const num = number / 100;
-      const payload = {'totalAmount': num};
+      const num = number;
+      const payload = {'restaurantId': "674df6ef2cdd0a3d1d2df9de", 'totalAmount': num};
       console.log('Continue button pressed ', num);
-      try {
-        const response = await fetch(createOrderEndpoint, {
+      const response = await fetch(createOrderEndpoint, 
+          {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
-      })} catch (error) {
-        console.error('Error creating order: ', error);
-      }
-      const data = await response?.json() || {};
-      console.log('Order created: ', data);
-      setOrderData(data);
-      setShowOrderSummary(false);
+      });
+      const data = await response.json()
+      const numb = formatCurrency(num)
+      setOrderData({ ...data, numb });
+      setShowOrderSummary(!showOrderSummary);
     };
 
     return (
@@ -73,10 +71,23 @@ function NewOrderScreen(props) {
           </>
         ) : (
           <View style={styles.successMessage}>
-            <Text style={styles.successText}>Pedido criado com sucesso!</Text>
-            <Text style={styles.successText}>Para entrar no grupo de divisão, acesse o código: {orderData.accessCode}</Text>
-            <Text style={styles.successText}>Valor do pedido: {formatCurrency(orderData.totalAmount * 100)}</Text>
-            <Text style={styles.successText}>ID do pedido: {orderData.orderId}</Text>
+            <Text style={styles.successTextHeader}>Pedido criado com sucesso!</Text>
+            <View style={{top: "20%"}}>
+                <View style={{top: "-20%"}}>
+                    <Text style={styles.successText}>Para entrar no grupo de divisão, acesse o código:</Text>
+                    <Text style={styles.successTextBig}>{orderData.orderAccessCode}</Text>
+                </View>
+                <View style={{top: "-10%"}}>
+                    <Text style={styles.successText}>Valor do pedido:</Text>
+                    <Text style={styles.successTextBig}>{orderData.numb}</Text>
+                </View>
+            </View>
+            <Text style={styles.successTextId}>ID do pedido: {orderData.orderId}</Text>
+            <View style={{top: "35%"}}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("OrderSummary", { orderData })}>
+                  <Image source={require('../assets/Continue button.png')}/>
+                </TouchableOpacity>
+            </View>
           </View>
         )}
       </ImageBackground>
@@ -103,7 +114,7 @@ const styles = StyleSheet.create({
         color: '#7BD96B', fontSize: 36, fontFamily: 'Montserrat', fontWeight: '700', wordWrap: 'break-word'
     },
     numpadText: {
-      color: 'white', fontSize: 24, fontFamily: 'Montserrat', fontWeight: '700'
+        color: 'white', fontSize: 36, fontFamily: 'Montserrat', fontWeight: '700', wordWrap: 'break-word'
     },
     order: {
       marginBottom: 20
@@ -149,7 +160,33 @@ const styles = StyleSheet.create({
       fontWeight: '700',
       textAlign: 'center',
       marginVertical: 10
-    }
+    },
+    successTextHeader: {
+          top: "-15%",
+          fontSize: 24,
+          color: '#7BD96B',
+          fontFamily: 'Montserrat',
+          fontWeight: '700',
+          textAlign: 'center',
+          marginVertical: 10
+        },
+    successTextId: {
+      top: "30%",
+      fontSize: 24,
+      color: '#7BD96B',
+      fontFamily: 'Montserrat',
+      fontWeight: '700',
+      textAlign: 'center',
+      marginVertical: 10
+    },
+    successTextBig: {
+          fontSize: 40,
+          color: '#7BD96B',
+          fontFamily: 'Montserrat',
+          fontWeight: '700',
+          textAlign: 'center',
+          marginVertical: 10
+        }
 });
 
 export default NewOrderScreen;

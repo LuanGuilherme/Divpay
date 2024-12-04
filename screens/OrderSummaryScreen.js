@@ -1,55 +1,64 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, ImageBackground, StatusBar, View } from 'react-native';
-
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, SafeAreaView, View, Image, TouchableOpacity, ImageBackground, StatusBar, TextInput } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+const createOrderEndpoint = 'http://localhost:3000/orders/status'; // Update with your actual endpoint
 
 function OrderSummaryScreen({ route }) {
   const { orderData } = route.params;
+  const [status, setStatus] = useState('Pago');
+    const [show, setShow] = useState(true)
 
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.summary}>
-        <Text style={styles.text}>Order Summary</Text>
-        <Text style={styles.text}>Total Amount: {orderData.totalAmount}</Text>
-        {/* Display other order data as needed */}
-      </View>
+        <ImageBackground source={require('../assets/Cobranca.png')} resizeMode="cover" style={styles.image}>
+          <View style={{top:"-20%"}}>
+            <Text style={styles.text}>Valor do pedido: {orderData.numb}</Text>
+          </View>
+          <View style={{top: "-10%"}}>
+            <Text style={styles.text}>Status: {status}</Text>
+          </View>
+          <View>
+            {show ? (
+                <Image source={require('../assets/Done 2.png')}/>
+            ) :
+            (
+                <TouchableOpacity onPress={() => activate()} style={styles.tela}>
+                  </TouchableOpacity>)}
+          </View>
+        </ImageBackground>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    image: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '100%',
-      height: '100%'
-    },
-    button1: {
-        bottom: 13,
-        left: 173
-    },
-    button2: {
-        top: 55,
-        left: 173
-    },
-    text: {
-        fontSize: 28,
-        color: '#7BD96B',
-        fontFamily: 'Montserrat',
-        fontWeight: 'bold',
-        bottom: 220
-    },
-    summary: {
-      alignItems: 'center',
-      justifyContent: 'center'
-    }
-  });
+tela: {
+    width: "100%",
+    height: "100%"
+},
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+   image: {
+     flex: 1,
+     alignItems: 'center',
+     justifyContent: 'center',
+     width: '100%',
+     height: '100%'
+   },
+  summary: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  text: {
+      color: '#7BD96B',
+      fontSize: 24,
+      fontFamily: 'Montserrat',
+      fontWeight: '700'
+  }
+});
 
 export default OrderSummaryScreen;

@@ -29,6 +29,7 @@ export default function App() {
         <Stack.Screen name="Payment" component={PaymentScreen} options={{headerShown: false}} />
         <Stack.Screen name="RestaurantHome" component={RestaurantHomeScreen} options={{headerShown: false}} />
         <Stack.Screen name="OrderSummary" component={OrderSummaryScreen} options={{headerShown: false}} />
+        <Stack.Screen name="NewOrder" component={NewOrderScreen} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
