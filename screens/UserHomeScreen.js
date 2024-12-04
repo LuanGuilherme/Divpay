@@ -5,13 +5,14 @@ import {
     useNavigation,
   } from '@react-navigation/native';
 
-function ClientHomeScreen() {
+function RestaurantHomeScreen(props) {
+
     const [show, setShow] = useState(true);
     const navigation = useNavigation();
 
     return (
-        <SafeAreaView style={styles.container}>
-            <ImageBackground source={require('../assets/Homepage.png')} resizeMode="cover" style={styles.image}>
+    <SafeAreaView style={styles.container}>
+      <ImageBackground source={require('../assets/Homepage.png')} resizeMode="cover" style={styles.image}>
 
         <View style={styles.header}>
             <TouchableOpacity>
@@ -25,7 +26,11 @@ function ClientHomeScreen() {
         <Text style={styles.text}>Olá, </Text>
 
         <TouchableOpacity style={styles.order} onPress={() => navigation.navigate('NewOrderScreen')}>
-            <Image source={require('../assets/PagarPedido.png')}/>
+            <Image source={require('../assets/pagar_btn.png')}/>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.order} onPress={() => navigation.navigate('NewOrderScreen')}>
+            <Image source={require('../assets/historico_btn.png')}/>
         </TouchableOpacity>
 
         <View style={styles.icons}>
@@ -40,9 +45,9 @@ function ClientHomeScreen() {
             </TouchableOpacity>
         </View>
 
-            </ImageBackground>
-            <StatusBar style="auto" />
-        </SafeAreaView>
+      </ImageBackground>
+      <StatusBar style="auto" />
+    </SafeAreaView>
     );
 }
 
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
         fontWeight: '100'
     },
     icons: {
-        top: 300,
+        top: 200,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         width: '100%'
@@ -80,13 +85,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '85%',
-
+        
     },
     order: {
-        bottom: 100
+        bottom: 80,
+        paddingTop: 20
     }
   });
 
-
-
-export default ClientHomeScreen;
+export default RestaurantHomeScreen;
