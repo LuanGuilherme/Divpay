@@ -17,7 +17,7 @@ function SignInScreen(props) {
         <Text style={styles.text}>Senha</Text>
         <TextInput secureTextEntry={true} style={styles.input}/>
         <Text style={styles.forget}>Esqueceu a senha?</Text>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ClientHome')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('RestaurantHome')}>
           <Image source={require('../assets/SignIn button.png')}/>
         </TouchableOpacity>
       </ImageBackground>

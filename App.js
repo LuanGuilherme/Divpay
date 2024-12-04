@@ -10,6 +10,8 @@ import ClientHomeScreen from './screens/ClientHomeScreen';
 import NewOrderScreen from './screens/NewOrderScreen';
 import NewGroupScreen from './screens/NewGroupScreen';
 import PaymentScreen from './screens/PaymentScreen';
+import OpenOrderScreen from './screens/OpenOrderScreen';
+import OrderSummaryScreen from './screens/OrderSummaryScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,8 +24,11 @@ export default function App() {
         <Stack.Screen name="SignIn" component={SignInScreen} options={{headerShown: false}} />
         <Stack.Screen name="ClientHome" component={ClientHomeScreen} options={{headerShown: false}} />
         <Stack.Screen name="NewOrderScreen" component={NewOrderScreen} options={{headerShown: false}} />
+        <Stack.Screen name="OpenOrderScreen" component={OpenOrderScreen} options={{headerShown: false}} />
         <Stack.Screen name="NewGroup" component={NewGroupScreen} options={{headerShown: false}} />
         <Stack.Screen name="Payment" component={PaymentScreen} options={{headerShown: false}} />
+        <Stack.Screen name="RestaurantHome" component={RestaurantHomeScreen} options={{headerShown: false}} />
+        <Stack.Screen name="OrderSummary" component={OrderSummaryScreen} options={{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
