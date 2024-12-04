@@ -1,25 +1,58 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground, StatusBar, TextInput } from 'react-native';
-import {
-    createStaticNavigation,
-    useNavigation,
-  } from '@react-navigation/native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground, StatusBar, TextInput, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 function SignInScreen(props) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const navigation = useNavigation();
+
+    const handleSignIn = () => {
+            console.log('Email:', email); // Exibe o email no console
+            console.log('Senha:', password); // Exibe a senha no console
+
+            switch(email){
+                case "test1@test" :
+                    navigation.navigate('RestaurantHome');
+                    break;
+                case "test2@test" :
+                    navigation.navigate('ClientHome');
+                                    break;
+                case "test3@test" :
+                    navigation.navigate('ClientHome');
+                                    break;
+                case "test4@test" :
+                    navigation.navigate('ClientHome');
+                                    break;
+                default:
+                    navigation.navigate('ClientHome');
+            }
+
+        };
 
     return (
     <View style={styles.container}>
       <ImageBackground source={require('../assets/Sign In screen.png')} resizeMode="cover" style={styles.image}>
         <Text style={styles.text}>Email</Text>
-        <TextInput style={styles.input}/>
+        <TextInput
+            style={styles.input}
+            placeHolder="Digite seu email"
+            value={email}
+            onChangeText={setEmail}
+        />
         <Text style={styles.text}>Senha</Text>
-        <TextInput secureTextEntry={true} style={styles.input}/>
+        <TextInput
+                            secureTextEntry={true}
+                            style={styles.input}
+                            placeholder="Digite sua senha"
+                            value={password} // Define o valor do TextInput como o estado 'password'
+                            onChangeText={setPassword} // Atualiza o estado 'password' sempre que o texto mudar
+                        />
         <Text style={styles.forget}>Esqueceu a senha?</Text>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('RestaurantHome')}>
-          <Image source={require('../assets/SignIn button.png')}/>
-        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+                            <Image source={require('../assets/SignIn button.png')} />
+                        </TouchableOpacity>
       </ImageBackground>
       <StatusBar style="auto" />
     </View>
