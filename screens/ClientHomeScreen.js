@@ -24,7 +24,7 @@ function ClientHomeScreen() {
 
         <Text style={styles.text}>Olá, </Text>
 
-        <TouchableOpacity style={styles.order} onPress={() => navigation.navigate('NewOrderScreen')}>
+        <TouchableOpacity style={styles.order} onPress={() => navigation.navigate('OpenOrderScreen')}>
             <Image source={require('../assets/PagarPedido.png')}/>
         </TouchableOpacity>
 

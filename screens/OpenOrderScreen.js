@@ -8,14 +8,36 @@ import {
 function OpenOrderScreen() {
 
     const navigation = useNavigation();
+    const [inputValue, setInputValue] = useState('');
+    const [response, setResponse] = useState(null);
+
+    const sendRequest = async () => {
+      const test = await fetch('http://18.119.115.84/orders/scanOrderByAccessCode',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            "accessCode": inputValue
+          })
+        }
+      )
+      console.log(test)
+      const retorno = await test.json()
+      navigation.navigate("NewGroup", { orderJson: retorno })
+      // .then((response) => console.log(response.data))
+      // .catch((error) => console.error('Erro:', error));
+    };
+
 
     return (
     <SafeAreaView style={styles.container}>
       <ImageBackground source={require('../assets/Cobranca.png')} resizeMode="cover" style={styles.image}>
 
       <Text style={styles.text}>Código de pagamento</Text>
-      <TextInput style={styles.input}/>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('NewGroup')}>
+      <TextInput style={styles.input} value={inputValue} onChangeText={(text) => setInputValue(text)} />
+      <TouchableOpacity style={styles.button} onPress={sendRequest}>
           <Image source={require('../assets/pagar_btn.png')}/>
       </TouchableOpacity>
 
@@ -42,8 +64,19 @@ const styles = StyleSheet.create({
     text: {
         color: '#222', fontSize: 36, fontFamily: 'Montserrat', fontWeight: '700', wordWrap: 'break-word',
     },
-    numpadText: {
-      color: 'white', fontSize: 24, fontFamily: 'Montserrat', fontWeight: '700'
+    icons: {
+        top: 300,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        width: '100%'
+    },
+    header: {
+        bottom: 270,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '85%',
+
     },
     button: {
       top: 50
@@ -61,37 +94,10 @@ const styles = StyleSheet.create({
       padding: 10,
     },
     order: {
-      marginBottom: 20
-    },
-    visor: {
-      width: '80%',
-      height: 50,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: 10,
-      marginBottom: 20
-    },
-    visorText: {
-      color: '#7BD96B',
-      fontSize: 24,
-      fontFamily: 'Montserrat',
-      fontWeight: '700'
-    },
-    numPad: {
-      width: '80%',
-      alignItems: 'center',
-      top: "20%"
-    },
-    numPadButton: {
-      width: '30%',
-      margin: '1%',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 10,
-      backgroundColor: '#7BD96B',
-      borderRadius: 5
+        top: 100,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
-});
+  });
 
 export default OpenOrderScreen;
