@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, View, Image, TouchableOpacity, ImageBackground, StatusBar, TextInput } from 'react-native';
+import { TextInputMask } from 'react-native-masked-text';
 
-function NewOrderScreen(props) {
+function NewOrderScreen() {
 
     const [show, setShow] = useState(true);
+    const [value, setValue] = useState('');
+    const handleChange = (text) => {
+        setValue(text); // Armazena o valor formatado
+    };
 
     return (
     <SafeAreaView style={styles.container}>
       <ImageBackground source={require('../assets/Cobranca.png')} resizeMode="cover" style={styles.image}>
 
         <View style={styles.order}>
-            <TextInput style={styles.text} keyboardType='numeric'></TextInput>
+//            <TextInput style={styles.text} keyboardType='numeric'></TextInput>
+            <TextInputMask
+                    type={'money'} // Usando o tipo money
+                    value={value}
+                    onChangeText={handleChange}
+                    style={styles.input}
+                    placeholder="R$ 0,00"
+                    keyboardType="numeric"
+                  />
         </View>
 
       </ImageBackground>
@@ -33,9 +46,13 @@ const styles = StyleSheet.create({
       width: '100%',
       height: '100%'
     },
-    text: {
-        color: '#7BD96B', fontSize: 36, fontFamily: 'Montserrat', fontWeight: '700', wordWrap: 'break-word',
-    },
+     input: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        padding: 10,
+        textAlign: 'right', // Alinha o texto à direita
+      },
     icons: {
         top: 300,
         flexDirection: 'row',

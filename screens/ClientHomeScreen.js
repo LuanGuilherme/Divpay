@@ -1,29 +1,45 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, View, Image, TouchableOpacity, ImageBackground, StatusBar, TextInput } from 'react-native';
+import {
+    createStaticNavigation,
+    useNavigation,
+  } from '@react-navigation/native';
 
 function ClientHomeScreen() {
     const [show, setShow] = useState(true);
+    const navigation = useNavigation();
 
     return (
         <SafeAreaView style={styles.container}>
             <ImageBackground source={require('../assets/Homepage.png')} resizeMode="cover" style={styles.image}>
-                <StatusBar barStyle="light-content" />
-                <View style={styles.header}>
-                    <View style={styles.menuIcon}>
-                        <Text style={styles.menuText}>☰</Text>
-                    </View>
-                    <Text style={styles.headerText}>Home</Text>
-                </View>
-                <View style={styles.content}>
-                    <Text style={styles.welcomeText}>Olá,</Text>
-                    <Text style={styles.subText}>Seja bem-vindo de volta</Text>
-                </View>
-                <View style={styles.content}>
-                    <Image source={require('../assets/PagarPedido.png')}style={styles.image}></Image>
-                </View>
-                <View style={styles.content}>
-                    <Image source={require('../assets/HistoricoPagamento.png')}style={styles.image}></Image>
-                </View>
+
+        <View style={styles.header}>
+            <TouchableOpacity>
+                <Image source={require('../assets/Hamburger Menu.png')} style={{width: 25, height: 17}}/>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <Image source={require('../assets/Profile Image.png')}/>
+            </TouchableOpacity>
+        </View>
+
+        <Text style={styles.text}>Olá, </Text>
+
+        <TouchableOpacity style={styles.order} onPress={() => navigation.navigate('NewOrderScreen')}>
+            <Image source={require('../assets/PagarPedido.png')}/>
+        </TouchableOpacity>
+
+        <View style={styles.icons}>
+            <TouchableOpacity>
+                <Image source={require('../assets/wallet.png')}/>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <Image source={require('../assets/bell.png')}/>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <Image source={require('../assets/profile.png')}/>
+            </TouchableOpacity>
+        </View>
+
             </ImageBackground>
             <StatusBar style="auto" />
         </SafeAreaView>
@@ -32,59 +48,45 @@ function ClientHomeScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-    header: {
-        backgroundColor: '#53E88B',
-        height: '35%',
-        borderBottomLeftRadius: 50,
-        borderBottomRightRadius: 50,
-        paddingHorizontal: 20,
-        paddingTop: StatusBar.currentHeight || 20,
-        alignItems: 'center',
-    },
-    menuIcon: {
-        position: 'absolute',
-        left: 20,
-        top: StatusBar.currentHeight || 20,
-    },
-    menuText: {
-        fontSize: 24,
-        color: '#fff',
-    },
-    headerText: {
-        textAlign: 'center',
-        fontSize: 17,
-        color: '#fff',
-        fontFamily: 'Arimo Hebrew Subset',
-        fontWeight: 'bold',
-        wordWrap: 'break-word',
-    },
-    content: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: -30,
-    },
-    welcomeText: {
-        fontSize: 32,
-        fontWeight: 'bold',
-        color: '#000',
-    },
-    subText: {
-        fontSize: 28,
-        color: '#000',
-        marginTop: 5,
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     image: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        height: '100%'
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%',
+      height: '100%'
     },
-});
+    text: {
+        fontSize: 34,
+        bottom: 280,
+        right: 105,
+        fontFamily: 'Montserrat',
+        color: '#fff',
+        fontWeight: '100'
+    },
+    icons: {
+        top: 300,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        width: '100%'
+    },
+    header: {
+        bottom: 270,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '85%',
+
+    },
+    order: {
+        bottom: 100
+    }
+  });
+
 
 
 export default ClientHomeScreen;
