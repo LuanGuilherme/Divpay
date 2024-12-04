@@ -5,7 +5,7 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 
-function NewOrderScreen(props) {
+function NewOrderScreen() {
 
     const navigation = useNavigation();
 
