@@ -12,7 +12,7 @@ function RestaurantHomeScreen(props) {
 
     return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground source={require('../assets/Homepage Restaurante.png')} resizeMode="cover" style={styles.image}>
+      <ImageBackground source={require('../assets/Homepage.png')} resizeMode="cover" style={styles.image}>
 
         <View style={styles.header}>
             <TouchableOpacity>
@@ -25,7 +25,7 @@ function RestaurantHomeScreen(props) {
 
         <Text style={styles.text}>Olá, </Text>
 
-        <TouchableOpacity style={styles.order} onPress={() => navigation.navigate('NewOrder')}>
+        <TouchableOpacity style={styles.order} onPress={() => navigation.navigate('NewOrderScreen')}>
             <Image source={require('../assets/new_order_btn.png')}/>
         </TouchableOpacity>
 
